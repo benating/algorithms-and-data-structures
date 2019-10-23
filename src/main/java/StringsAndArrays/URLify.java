@@ -2,24 +2,24 @@ package StringsAndArrays;
 
 public class URLify {
 
-  public String solution(String input, int trueLength) {
-    int inputLength = input.length();
-    StringBuilder outputBuilder = new StringBuilder(input);
+  public String solution(char[] input, int trueLength) {
+    int inputLength = input.length;
 
+    // Replacing characters in place
     while (trueLength > 0){
-      if(input.charAt(trueLength - 1) == ' ') {
-        outputBuilder.setCharAt(inputLength - 1, '0');
-        outputBuilder.setCharAt(inputLength - 2, '2');
-        outputBuilder.setCharAt(inputLength - 3,'%');
+      if(input[trueLength - 1] == ' ') {
+        input[inputLength - 1] = '0';
+        input[inputLength - 2] = '2';
+        input[inputLength - 3] = '%';
         inputLength-=3;
       } else {
-        outputBuilder.setCharAt(inputLength - 1, input.charAt(trueLength - 1));
+        input[inputLength - 1] = input[trueLength - 1];
         inputLength--;
       }
       trueLength--;
     }
 
-    System.out.println(outputBuilder.toString());
-    return outputBuilder.toString();
+    System.out.println(String.valueOf(input));
+    return String.valueOf(input);
   }
 }
