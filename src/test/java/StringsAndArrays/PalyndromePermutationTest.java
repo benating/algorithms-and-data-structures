@@ -2,16 +2,22 @@ package StringsAndArrays;
 
 import org.junit.jupiter.api.Test;
 
+import static StringsAndArrays.PalyndromePermutation.reverseString;
+
 public class PalyndromePermutationTest {
-    String validString = "Tact Coa";
     PalyndromePermutation palyndromePermutation = new PalyndromePermutation();
     @Test
     void validTest() {
-        assert (palyndromePermutation.solution(validString));
+        assert (palyndromePermutation.diegoSolution("Tact Coa"));
     }
 
     @Test
-    void invalidTest() {
-        assert (palyndromePermutation.solution("abc DEF"));
+    void validTest2() {
+        assert (palyndromePermutation.diegoSolution("Never odd or even"));
+    }
+
+    @Test
+    void reverseStringTest() {
+        assert (reverseString("cat").equals("tac"));
     }
 }
