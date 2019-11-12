@@ -6,9 +6,10 @@ import static StringsAndArrays.PalyndromePermutation.reverseString;
 
 public class PalyndromePermutationTest {
     PalyndromePermutation palyndromePermutation = new PalyndromePermutation();
+    String validString = "Tact Coa";
     @Test
     void validTest() {
-        assert (palyndromePermutation.diegoSolution("Tact Coa"));
+        assert (palyndromePermutation.diegoSolution(validString));
     }
 
     @Test
