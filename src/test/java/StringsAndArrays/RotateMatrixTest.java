@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class RotateMatrixTest {
 
-    private RotateMatrix rotateMatrix = new RotateMatrix();
+    private RotateMatrix rotateMatrix  = new RotateMatrix();
 
     Integer[][] exampleMatrix = {
             {1,2,3},
