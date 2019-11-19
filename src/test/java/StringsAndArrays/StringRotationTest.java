@@ -16,7 +16,7 @@ public class StringRotationTest {
 
             assert (stringRotation.solution(input, rotatedString));
             assert (stringRotation.chrisSolution(input, rotatedString));
-            assert (stringRotation.chrisSolution(input, rotatedString));
+            assert (stringRotation.chrisSolution2(input, rotatedString));
         }
     }
 
