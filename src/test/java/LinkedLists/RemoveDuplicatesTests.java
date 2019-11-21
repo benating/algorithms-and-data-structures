@@ -4,27 +4,42 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class RemoveDuplicatesTests {
-    static Node head = new Node(0);
-
-    @BeforeAll
-    public static void init() {
-        head.appendToTail(1);
-        head.appendToTail(2);
-        head.appendToTail(3);
-        head.appendToTail(4);
-        head.appendToTail(1);
-        head.appendToTail(2);
-        head.appendToTail(2);
-        head.appendToTail(3);
-        head.appendToTail(4);
-    }
 
     @Test
     void validTest1() {
-        Node.printNodes(head);
+
+        Node head = new Node(0);
+
+        head.appendToTail(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(2);
+        head.appendToTail(1);
+        head.appendToTail(3);
+
+
         head = Node.removeDuplicates(head);
-        System.out.println("---------");
-        Node.printNodes(head);
-        assert (!true);
+        int length = Node.getLength(head);
+        assert (length == 5);
+    }
+
+    @Test
+    void whenLastNodeIsNotADuplicate() {
+
+        Node head = new Node(0);
+
+        head.appendToTail(1);
+        head.appendToTail(2);
+        head.appendToTail(3);
+        head.appendToTail(4);
+        head.appendToTail(2);
+        head.appendToTail(1);
+        head.appendToTail(5);
+
+
+        head = Node.removeDuplicates(head);
+        int length = Node.getLength(head);
+        assert (length == 6);
     }
 }

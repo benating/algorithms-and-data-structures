@@ -33,26 +33,39 @@ public class Node {
         throw new NodeNotFoundException("Could not find node in list");
     }
 
-    static Node removeDuplicates(Node head) {
-        HashMap<Integer, Boolean> counter = new HashMap<>();
-        Node n = head;
-        Node nPrev = head;
-        // todo: this is working just need to check that the last one is also being updated
-        while (n.next != null) {
-            if(counter.get(n.data) != null) {
-                nPrev = n;
-                n.next = n.next.next;
-            } else {
-                counter.put(n.data, true);
-                nPrev = n;
-                n = n.next;
-            }
+    static int getLength(Node head) {
+        if(head.next == null) {
+            return 1;
         }
-        // also need to check the last node even if it doesnt has a pointer
-        System.out.println(nPrev.data);
-        System.out.println(n.data);
-        System.out.println(counter);
-        return head;
+        int counter = 1;
+        Node n = head;
+        while (n.next != null) {
+            counter += 1;
+            n = n.next;
+        }
+        return counter;
+    }
+
+    static Node removeDuplicates(Node head) {
+        HashMap<Integer, Boolean> map = new HashMap<>();
+        Node n = head.next;
+        Node newHead = new Node(head.data);
+
+        map.put(head.data, true);
+
+        while (n.next != null) {
+            if (map.get(n.data) == null) {
+                map.put(n.data, true);
+                newHead.appendToTail(n.data);
+            }
+            n = n.next;
+        }
+
+        // we also need to do the check for the last node
+        if (map.get(n.data) == null) {
+            newHead.appendToTail(n.data);
+        }
+        return newHead;
     }
 
     /*
