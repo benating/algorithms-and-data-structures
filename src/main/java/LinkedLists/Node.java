@@ -49,8 +49,6 @@ public class Node {
     static Node kThToLast(Node head, int k) {
         int length = Node.getLength(head);
         int index = length - k;
-        System.out.println(length);
-        System.out.println(index);
         Node n = head;
 
         while (n.next != null) {

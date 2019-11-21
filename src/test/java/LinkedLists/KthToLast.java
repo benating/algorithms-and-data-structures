@@ -13,10 +13,6 @@ public class KthToLast {
         head.appendToTail(5);
 
         Node n = Node.kThToLast(head, 2);
-
-        System.out.println("--------------");
-        System.out.println("n.data");
-        System.out.println(n.data);
         assert (n.data == 3);
     }
 }
