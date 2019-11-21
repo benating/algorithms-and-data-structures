@@ -46,6 +46,23 @@ public class Node {
         return counter;
     }
 
+    static Node kThToLast(Node head, int k) {
+        int length = Node.getLength(head);
+        int index = length - k;
+        System.out.println(length);
+        System.out.println(index);
+        Node n = head;
+
+        while (n.next != null) {
+            if (index == 1) return n;
+            else {
+                index--;
+                n = n.next;
+            }
+        }
+        return head;
+    }
+
     static Node removeDuplicates(Node head) {
         HashMap<Integer, Boolean> map = new HashMap<>();
         Node n = head.next;
