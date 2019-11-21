@@ -59,4 +59,12 @@ public class OneAwayTest {
     assert (!oneAway.diegoSolution("pale", "paleee"));
     assert (!oneAway.chrisSolution("pale", "paleee"));
   }
+
+
+  // Edge case
+  @Test
+  void invalidTest5() {
+    assert (!oneAway.diegoSolution("aabb", "abab")); // False positive, this is 2 edits!
+    assert (!oneAway.chrisSolution("aabb", "abab"));
+  }
 }
