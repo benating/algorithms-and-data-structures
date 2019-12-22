@@ -31,5 +31,10 @@
             <version>5.5.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.chrislmy</groupId>
+            <artifactId>credit-card-sanitizer</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 </project>
