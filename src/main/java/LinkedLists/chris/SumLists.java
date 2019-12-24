@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class SumLists {
 
+  // Tested in leetcode: https://leetcode.com/problems/add-two-numbers/
   public Node solution(Node a, Node b) {
     boolean carryOver = false;
     Node res = new Node(-1);
@@ -39,6 +40,7 @@ public class SumLists {
     return resHead.next;
   }
 
+  // Tested in leetcode: https://leetcode.com/problems/add-two-numbers-ii/
   public Node solution2(Node l1, Node l2) {
     Stack s1 = new Stack<>();
     Stack s2 = new Stack<>();

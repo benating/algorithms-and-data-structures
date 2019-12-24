@@ -3,6 +3,8 @@ package LinkedLists.chris;
 import java.util.ArrayList;
 import java.util.List;
 
+// There is a similar question on leetcode: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+// The same approach can be used.
 public class KthToLast {
 
   // O(n^2) because we have to get the length first
@@ -77,9 +79,9 @@ public class KthToLast {
   }
 
   public static void main(String[] args) {
-    Node list = Node.createList(0, 1, 2, 3, 4);
+    Node list = Node.createList(1, 2, 3, 4, 5);
     Node node1 = new KthToLast().solutionRecursive(list, 4);
-    Node node2 = new KthToLast().solutionIterativeImproved(list, 4);
+    Node node2 = new KthToLast().solutionIterativeImproved(list, 2);
     System.out.println(node1.data);
     System.out.println(node2.data);
   }
