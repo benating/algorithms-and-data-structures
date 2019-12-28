@@ -4,7 +4,8 @@ import java.util.Stack;
 
 public class PalindromeList {
 
-  // Tested in leetcode: https://leetcode.com/problems/palindrome-linked-list/
+  // Tested in leetcode:
+  // https://leetcode.com/problems/palindrome-linked-list/
   public boolean solution(Node head) {
     Node slow = head;
     Node fast = head;
