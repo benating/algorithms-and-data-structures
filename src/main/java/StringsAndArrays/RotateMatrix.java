@@ -19,4 +19,36 @@ public class RotateMatrix {
         Integer[][] converted = holder.toArray(new Integer[length][length]);
         return converted;
     }
+
+    Integer[][] solutionChris(Integer[][] matrix) {
+        int length = matrix.length;
+
+        for (int row = 0; row < length / 2; row++) {
+            for (int col = row; col < length - row - 1; col++) {
+                // length - row - 1 is the row offset, this is fixed in the inner loop.
+                int rowOffset = length - row - 1;
+                // length - col - 1 is the col offset, this is the changing variable in the inner loop.
+                int colOffset = length - col - 1;
+
+                // Store top in temp
+                int temp = matrix[row][col];
+                // left to top
+                matrix[row][col] = matrix[colOffset][row];
+                // btm to left
+                matrix[colOffset][row] = matrix[rowOffset][colOffset];
+                // right to btm
+                matrix[rowOffset][colOffset] = matrix[col][rowOffset];
+                // top to right
+                matrix[col][colOffset] = temp;
+
+                // Debugging code
+                // System.out.println("top: " + matrix[row][col]);
+                // System.out.println("right: " + matrix[col][rowOffset]);
+                // System.out.println("btm: " + matrix[rowOffset][colOffset]);
+                // System.out.println("left: " + matrix[colOffset][row]);
+            }
+        }
+
+        return matrix;
+    }
 }
