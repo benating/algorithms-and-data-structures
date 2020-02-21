@@ -1,9 +1,12 @@
 package StringsAndArrays;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
 
 public class URLifyTest {
-
+  URLify urlIfy = new URLify();
   /*
    * Chris's test cases start
    * */
@@ -30,21 +33,10 @@ public class URLifyTest {
 
   @Test
   void testCorrectSolution() {
-    assert (new URLify().solution("Mr John Smith", 13).equals("Mr%20John%20Smith"));
-  }
+    char[] test = "Mr John Smith    ".toCharArray();
+    urlIfy.solution(test, 13);
+    String output = new String(test);
 
-  @Test
-  void testCorrectSolution2() {
-    assert (new URLify().solution("Mr John Smith     ", 13).equals("Mr%20John%20Smith"));
-  }
-
-  @Test
-  void incorrectSolution() {
-    assert (!new URLify().solution("Mr John Smith", 13).equals("Mr%20John%20Smith%20"));
-  }
-
-  @Test
-  void incorrectSolution2() {
-    assert (!new URLify().solution("Mr John Smith     ", 13).equals("Mr%20John%20Smith      "));
+    assertEquals("Mr%20John%20Smith", output);
   }
 }

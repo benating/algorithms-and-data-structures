@@ -1,8 +1,6 @@
 package StringsAndArrays;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class URLify {
 
@@ -27,16 +25,27 @@ public class URLify {
     return String.valueOf(input);
   }
 
-  public String solution(String string, Integer length) {
+  public void solution(char[] str, Integer trueLength) {
+    int spaceCount = 0, index;
 
-    String[] split = string.split(" ");
-    ArrayList<String> withUrl = Arrays.stream(split).map(word -> word.concat("%20"))
-        .collect(Collectors.toCollection(ArrayList::new));
-    withUrl.set(split.length - 1, split[split.length - 1]);
+    for (int i = 0; i < trueLength; i++) {
+      if(str[i] == ' ') spaceCount++;
+    }
 
-    StringBuilder result = new StringBuilder();
-    withUrl.forEach(result::append);
+    index = trueLength + (spaceCount * 2);
+    if (trueLength < str.length) str[trueLength] = '\0'; // end array
 
-    return result.toString();
+    for (int i = trueLength - 1; i >= 0; i--) {
+      if (str[i] == ' ') {
+        str[index - 1] = '0';
+        str[index - 2] = '2';
+        str[index - 3] = '%';
+        index = index - 3;
+      } else {
+        str[index - 1] = str[i];
+        index--;
+      }
+    }
+    System.out.println(str);
   }
 }
