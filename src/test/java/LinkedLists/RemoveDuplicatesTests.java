@@ -1,13 +1,11 @@
 package LinkedLists;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class RemoveDuplicatesTests {
 
     @Test
     void validTest1() {
-
         Node head = new Node(0);
 
         head.appendToTail(1);
