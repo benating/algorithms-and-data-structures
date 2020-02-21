@@ -61,6 +61,25 @@ public class Node {
         return head;
     }
 
+    static void deleteMiddleNode(Node head) {
+        Node n1 = head;
+        Node n2 = head;
+        while (n1.next != null &&  n1.next.next != null) {
+            n1 = n1.next.next;
+            n2 = n2.next;
+        }
+        // todo: refactor this into a single while as I could keep a record when
+        Node n = head;
+        while (n.next != null) {
+            if (n.next.data == n2.data) {
+                n.next = n.next.next;
+                break;
+            } else {
+                n = n.next;
+            }
+        }
+    }
+
     static Node removeDuplicates(Node head) {
         HashMap<Integer, Boolean> map = new HashMap<>();
         Node n = head.next;

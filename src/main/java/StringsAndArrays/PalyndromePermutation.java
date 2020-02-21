@@ -1,96 +1,54 @@
 package StringsAndArrays;
+import static Utils.Utils.reverseString;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
+/*
+Given a string, write a function to check if it is a permutation of a palindrome. A palindrome is a word or phrase
+that is the same forwards and backwards. A permutation is a rearrangement of letters.The palindrome does not need to
+be limited to just dictionary words.
+
+Input: Tact Coa
+Output: True (permutations: "taco cat". "atco cta". etc.)
+ */
 
 public class PalyndromePermutation {
+    boolean isPalyndrome = false;
 
-  public boolean solution(String input) {
-    // todo: check if is a palyndrome
-    // todo: re-arrange string in many possible ways checking if it can be a palyndrome
-    return false;
-  }
-
-  public boolean solutionChris(String input) {
-    /*
-     * The hard rule for a string to be a permutation of a palindrome
-     * is that the characters in the string must be balanced.
-     * There are two cases to consider:
-     * 1. Strings with EVEN length (Then there are no stray characters i.e the string is fully balanced)
-     * 2. Strings with ODD length (Then there should be exactly one stray character)
-     * Runtime complexity O(n)
-     * */
-    HashSet<Character> characterLookup = new HashSet();
-    int inputLength = input.length();
-
-    for (char character : input.toCharArray()) {
-      char lowercase = Character.toLowerCase(character);
-
-      // Contains is an O(1) operation
-      if (characterLookup.contains(lowercase)) {
-        characterLookup.remove(lowercase); // Remove from Hashset is an O(1) operation
-      } else if (lowercase == ' ') {
-        // Ignore white spaces, this means the 'actual' length should also be updated
-        inputLength -= 1;
-      } else {
-        characterLookup.add(lowercase);
-      }
+    public boolean solution(String string) {
+        String flattened = string.replace(" ", "").toLowerCase();
+        isPalyndrome = false;
+        generatePermutations(flattened, "");
+        return isPalyndrome;
+//        return checkPalyndrome(flattened);
     }
 
-    return inputLength % 2 == 0 ? characterLookup.size() == 0 : characterLookup.size() == 1;
-  }
-
-    public boolean diegoSolution(String input) {
-
-        String tightString = input.replace(" ", "").toLowerCase();
-        ArrayList<String> list = new ArrayList<>();
-        PalyndromePermutation.diegoPermute(tightString, 0, tightString.length() - 1, list);
-        List<String> filtered = list.stream().filter(PalyndromePermutation::diegoSsPalindrome).distinct().collect(Collectors.toList());
-//        filtered.forEach(x -> System.out.println(x));
-        return filtered.size() > 0;
-    }
-
-    public static boolean diegoSsPalindrome(String input) {
-        String tightString = input.replace(" ", "").toLowerCase();
-        int length = tightString.length();
-        boolean isEven = length % 2 == 0;
-        if (isEven) {
-            int middle = tightString.length() / 2;
-            String firstHalf = tightString.substring(0, middle - 1);
-            String secondHalf = tightString.substring(middle + 1, length);
-            String secondReversed = reverseString(secondHalf);
-            return firstHalf.equals(secondReversed);
-        }
-        int middle = length / 2;
-        String firstHalf = tightString.substring(0, middle);
-        String secondHalf = tightString.substring(middle + 1, length);
-        String secondReversed = reverseString(secondHalf);
-        return firstHalf.equals(secondReversed);
-    }
-
-    public static void diegoPermute(String s, int l, int r, ArrayList<String> list) {
-        if (l == r) {
-            list.add(s);
-        } else {
-            for (int i = l; i <= r; i++) {
-                s = diegoSwapChars(s, l, r);
-                diegoPermute(s, l + 1, r, list);
-                s = diegoSwapChars(s, l, i);
+    public void generatePermutations(String string, String ans) {
+        int length = string.length();
+        if (length == 0) {
+            if (checkPalyndrome(ans)) {
+                isPalyndrome = true;
             }
+            // System.out.println(ans + ""); <- prints all permutations
+            return;
         }
-    };
-
-    public static String diegoSwapChars(String string, int i, int j) {
-        char[] chars = string.toCharArray();
-        char temp = chars[i];
-        chars[i] = chars[j];
-        chars[j] = temp;
-        return new String(chars);
+        for (int i = 0; i < length; i++) {
+            char c = string.charAt(i);
+            String ros = string.substring(0, i) + string.substring(i + 1);
+            generatePermutations(ros, ans + c);
+        }
     }
 
-    public static String reverseString(String string) {
-        return new StringBuilder(string).reverse().toString();
+    public boolean checkPalyndrome(String string) {
+        int length = string.length();
+        boolean isEvenLength = length % 2 == 0;
+        String firstHalf = string.substring(0, length / 2);
+        if (isEvenLength) {
+            String secondHalf = string.substring((length / 2), length);
+            secondHalf = reverseString(secondHalf);
+            return firstHalf.equals(secondHalf);
+        } else {
+            String secondHalf = string.substring((length / 2) + 1, length);
+            secondHalf = reverseString(secondHalf);
+            return firstHalf.equals(secondHalf);
+        }
     }
 }

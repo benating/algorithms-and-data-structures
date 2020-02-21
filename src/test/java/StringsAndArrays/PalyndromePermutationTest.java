@@ -2,64 +2,42 @@ package StringsAndArrays;
 
 import org.junit.jupiter.api.Test;
 
-import static StringsAndArrays.PalyndromePermutation.reverseString;
-
 public class PalyndromePermutationTest {
     PalyndromePermutation palyndromePermutation = new PalyndromePermutation();
-    String validString = "Tact Coa";
+
     @Test
-    void validTest() {
-        assert (palyndromePermutation.diegoSolution(validString));
+    void sortedOddLength() {
+        String s = "ABA";
+        assert (palyndromePermutation.solution(s));
     }
 
     @Test
-    void validTest2() {
-        assert (palyndromePermutation.diegoSolution("Never odd or even"));
+    void sortedOddLengthNotPalyndrome() {
+        String s = "ABC";
+        assert (!palyndromePermutation.solution(s));
     }
 
     @Test
-    void reverseStringTest() {
-        assert (reverseString("cat").equals("tac"));
-    }
-
-    /*
-     * Chris's test cases start
-     * */
-    @Test
-    void testValidStringWithSpaces1() {
-        assert (palyndromePermutation.solutionChris(validString));
+    void sortedOddLength2() {
+        String s = "AABAA";
+        assert (palyndromePermutation.solution(s));
     }
 
     @Test
-    void testValidStringWithSpaces2() {
-        assert (palyndromePermutation.solutionChris("RT O or"));
+    void sortedEvenLength() {
+        String s = "AABBAA";
+        assert (palyndromePermutation.solution(s));
     }
 
     @Test
-    void testValidStringWithSpaces3() {
-        assert (palyndromePermutation.solutionChris("Mr Owl ate my metal worm"));
+    void sortedString() {
+        String s = "Taco cat";
+        assert (palyndromePermutation.solution(s));
     }
 
     @Test
-    void testValidString2() {
-        assert (palyndromePermutation.solutionChris("aabb"));
+    void notSortedString() {
+        String s = "Tact Coa";
+        assert (palyndromePermutation.solution(s));
     }
-
-    @Test
-    void testValidString3() {
-        assert (palyndromePermutation.solutionChris("kakay"));
-    }
-
-    @Test
-    void testInvalidString() {
-        assert (!palyndromePermutation.solutionChris("abc DEF"));
-    }
-
-    @Test
-    void testInvalidString2() {
-        assert (!palyndromePermutation.solutionChris("You misspelled Palindrome mate"));
-    }
-    /*
-     * Chris's test cases end
-     * */
 }
