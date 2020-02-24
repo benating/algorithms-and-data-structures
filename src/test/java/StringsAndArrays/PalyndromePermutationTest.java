@@ -3,7 +3,7 @@ package StringsAndArrays;
 import org.junit.jupiter.api.Test;
 
 public class PalyndromePermutationTest {
-    PalyndromePermutation palyndromePermutation = new PalyndromePermutation();
+    private final PalyndromePermutation palyndromePermutation = new PalyndromePermutation();
 
     @Test
     void sortedOddLength() {

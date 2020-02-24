@@ -1,6 +1,9 @@
 package StringsAndArrays;
 
-import java.util.HashMap;
+import Utils.Utils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OneAway {
 
@@ -75,54 +78,51 @@ public class OneAway {
   /*
   Diego Solution
    */
-  boolean diegoSolution(String s1, String s2) {
+  boolean solution(String s1, String s2) {
+    int s1Length = s1.length();
+    int s2Length = s2.length();
 
-    if (s1.equals(s2)) {
-      return true;
+    // should also perform checks to see if the strings lengths are in the valid "range"
+    if (s1Length == s2Length) {
+      return oneReplaceAway(s1, s2);
+    } else if (s1Length > s2Length) {
+      return oneInsertAway(s1, s2);
+    } else if (s2Length > s1Length) {
+      return oneInsertAway(s2, s1);
     }
-
-    char[] s1Chars = s1.toCharArray();
-    int s1Length = s1Chars.length;
-    char[] s2Chars = s2.toCharArray();
-    int s2Length = s2Chars.length;
-
-    if ((s2Length < s1Length && s2Length + 1 != s1Length)) {
-      return false;
-    }
-    if ((s2Length > s1Length && s2Length - 1 != s1Length)) {
-      return false;
-    }
-
-    HashMap<Character, Integer> letters = diegoGenerateLettersMap(s1Chars);
-
-    // reduce the counter of each letter based
-    for (int i = 0; i < s2Length; i++) {
-      char current = s2Chars[i];
-      if (letters.get(current) == null) {
-        letters.put(current, 0);
-      } else {
-        int value = letters.get(current);
-        letters.put(current, value - 1);
-      }
-    }
-
-    // gets the count of how many different letters
-    Integer difference = letters.values().stream().reduce(Integer::sum).get();
-    return difference < 2 && difference > -2;
+    return false;
   }
 
-  HashMap<Character, Integer> diegoGenerateLettersMap(char[] chars) {
-    HashMap<Character, Integer> letters = new HashMap();
+  private boolean oneReplaceAway(String s1, String s2) {
+    boolean difference = false;
+    for (int i = 0; i < s1.length(); i++) {
+        char c1 = s1.charAt(i);
+        char c2 = s2.charAt(i);
+        if (c1 != c2) {
+          if ( difference) return false;
+          difference = true;
+        };
 
-    for (int i = 0; i < chars.length; i++) {
-      char current = chars[i];
-      if (letters.get(current) == null) {
-        letters.put(current, 1);
-      } else {
-        int value = letters.get(current);
-        letters.put(current, value + 1);
+    }
+    return true;
+  }
+
+  private boolean oneInsertAway(String s1, String s2) {
+    ArrayList<Character> s1Chars = Utils.stringToCharArrayList(s1);
+    ArrayList<Character> s2Chars = Utils.stringToCharArrayList(s2);
+    boolean difference = false;
+
+    for (int i = 0; i < s2.length(); i++) {
+      char c1 = s1Chars.get(i);
+      char c2 = s2Chars.get(i);
+
+      if (c1 != c2) {
+        if (difference) return false;
+        s1Chars.remove(i);
+        i--;
+        difference = true;
       }
     }
-    return letters;
+    return true;
   }
 }
