@@ -57,4 +57,20 @@ public class StringCompression {
     }
     return result.toString();
   }
+
+
+  String bernardSolution(String string) {
+    String result = helper( null, 0, string);
+    return result.length() < string.length() ? result : string;
+  }
+
+  String helper(Character curr, int count, String left) {
+    if (left.isEmpty()) {
+      return "" + curr + count;
+    } else if (curr == null || curr == left.charAt(0)) {
+      return helper(left.charAt(0), count+1, left.substring(1));
+    } else {
+      return "" + curr + count + helper(null, 0, left);
+    }
+  }
 }
